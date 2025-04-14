@@ -8,10 +8,11 @@ NeuroScan is a cutting-edge AI-powered platform designed to detect dementia and 
 ## Table of Contents
 1. [Interface](#interface)
 2. [Usage](#usage)
-3. [Features](#features)
-4. [Technologies Used](#technologies-used)
-5. [Future Scope](#future-scope)
-6. [Contributing](#contributing)
+3. [Model](#model)
+4. [Features](#features)
+5. [Technologies Used](#technologies-used)
+6. [Future Scope](#future-scope)
+7. [Contributing](#contributing)
    
 ![Home Page Interface](static/images/HomePage.png)
 
@@ -38,7 +39,10 @@ Admin Dashboard
 ![Admin Dashboard](static/images/AdminDashboard.png)
 
 ---
+## Model
 
+
+---
 ## Usage
 Follow these steps to use NeuroScan:
 
@@ -131,13 +135,38 @@ The ResNet50 model is designed for continuous improvement through automated retr
 ---
 
 ## Technologies Used
-NeuroScan is built using:
-- **Deep Learning Frameworks**: TensorFlow, PyTorch.
-- **Programming Language**: Python.
-- **Web Frameworks**: Flask/Django for backend development.
-- **Frontend Design**: HTML, CSS, JavaScript for responsive UI.
-- **Data Sources**: Alzheimer Disease Neuroimaging Initiative (ADNI) dataset.
 
+#### **1. Deep Learning Frameworks**
+NeuroScan utilizes two powerful deep learning frameworks:
+- **TensorFlow**: Provides scalability and production-ready capabilities for training the ResNet50 model efficiently.
+- **PyTorch**: Offers dynamic computation graphs, making it ideal for experimentation during training phases.
+
+---
+
+#### **2. ResNet50 Architecture**
+The core AI model is based on ResNet50, which uses residual connections to overcome vanishing gradients during training. It is adapted for multi-class classification of dementia stages.
+
+---
+
+#### **3. Dataset**
+NeuroScan relies on the Alzheimer Disease Neuroimaging Initiative (ADNI) dataset containing MRI scans, biomarkers, demographic details, and cognitive test results, ensuring high-quality predictions.
+
+---
+
+#### **4. Web Frameworks**
+The platform is built using:
+- **Flask/Django**: Backend frameworks that handle API requests and user interactions efficiently.
+- **HTML/CSS/JavaScript**: Frontend technologies used to create responsive interfaces.
+
+---
+
+#### **5. Visualization Tools**
+Advanced tools like Grad-CAM (for heatmaps) and Plotly/Matplotlib (for charts) are used to present diagnostic results visually.
+
+---
+
+#### **6. Deployment Tools**
+Docker containers ensure consistent environments across development stages, while cloud services like AWS provide scalability for hosting the application.
 ---
 
 ## Future Scope
@@ -153,4 +182,18 @@ Planned enhancements include:
 We welcome contributions from developers, researchers, and healthcare professionals! To contribute:
 
 1. Fork the repository.
-2. Create a feature branch:
+2. Create a feature branch: 'git checkout -b feature-name'
+3. Commit your changes and submit a pull request.
+
+Please review our Contribution Guidelines before submitting your work.
+
+---
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
+
+---
+
+## Contact
+For inquiries or support:
+- Email: masterdragonian@gmail.com 
