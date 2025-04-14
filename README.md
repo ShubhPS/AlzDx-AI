@@ -28,12 +28,15 @@ The user login page allows healthcare professionals to securely access the platf
 ### Admin Portal
 The admin portal is restricted to authorized personnel for managing system configurations, user accounts, and data security settings.
 
-![Admin Portal Interface](static/images/AdminLogin.png)
 Admin Login interface
-![Admin User Management](static/images/AllUsers.png)
+![Admin Portal Interface](static/images/AdminLogin.png)
+
 Admin user management
-![Admin Dashboard](static/images/AdminDashboard.png)
+![Admin User Management](static/images/AllUsers.png)
+
 Admin Dashboard
+![Admin Dashboard](static/images/AdminDashboard.png)
+
 ---
 
 ## Usage
