@@ -12,6 +12,8 @@ NeuroScan is a cutting-edge AI-powered platform designed to detect dementia and 
 4. [Technologies Used](#technologies-used)
 5. [Future Scope](#future-scope)
 6. [Contributing](#contributing)
+   
+![Home Page Interface](static/images/HomePage.png)
 
 ---
 
@@ -21,12 +23,12 @@ NeuroScan features two primary interfaces:
 ### User Login Interface
 The user login page allows healthcare professionals to securely access the platform using their credentials or third-party authentication options like Google or GitHub.
 
-![User Login Interface](https://pplx-res.cloudinary.com/image/upload/v1744650655/user_uploads/KhQagBfhwlGoVgv/Screenshot-250.jpg)
+![User Login Interface](static/images/UserLogin.png)
 
 ### Admin Portal
 The admin portal is restricted to authorized personnel for managing system configurations, user accounts, and data security settings.
 
-![Admin Portal Interface](https://pplx-res.cloudinary.com/image/upload/v1744650655/user_uploads/QohCBfDCyaCMFPQ/Screenshot-251.jpg)
+![Admin Portal Interface](static/images/AdminLogin.png)
 
 ---
 
