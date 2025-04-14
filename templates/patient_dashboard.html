@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - NeuroScan AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        .navbar {
+            background: #000000;
+            padding: 1rem 2rem;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            color: white !important;
+        }
+        .container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .upload-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .history-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .scan-item {
+            padding: 1rem;
+            border-bottom: 1px solid #f5f5f7;
+            transition: background-color 0.3s ease;
+        }
+        .scan-item:last-child {
+            border-bottom: none;
+        }
+        .scan-item:hover {
+            background-color: #f8f9fa;
+        }
+        .upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            border-color: #2997ff;
+            background-color: #f8f9fa;
+        }
+        .upload-icon {
+            font-size: 3rem;
+            color: #2997ff;
+            margin-bottom: 1rem;
+        }
+        .badge {
+            padding: 0.5em 1em;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-brain me-2"></i>NeuroScan AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">
+                            <i class="fas fa-home me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">
+                            <i class="fas fa-sign-out-alt me-1"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h2>Welcome back, {{ username }}</h2>
+            <p class="text-muted">Upload a brain scan image for analysis or view your scan history below.</p>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <h4 class="mb-4">Upload New Scan</h4>
+            <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+                <div class="upload-area" onclick="document.getElementById('scan-file').click()">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h5>Click to upload or drag and drop</h5>
+                    <p class="text-muted">Supported formats: JPG, PNG (max. 5MB)</p>
+                    <input type="file" id="scan-file" name="file" class="d-none" accept="image/*" onchange="updateFileName(this)">
+                    <p id="selected-file" class="mt-2 mb-0"></p>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary" id="upload-btn" disabled>
+                        <i class="fas fa-brain me-2"></i>Analyze Scan
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Scan History -->
+        <div class="history-section">
+            <h4 class="mb-4">Scan History</h4>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% if scans %}
+                {% for scan in scans %}
+                    <div class="scan-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Scan Result: <span class="badge bg-primary">{{ scan.prediction }}</span></h6>
+                                <small class="text-muted">
+                                    Confidence: {{ "%.2f"|format(scan.confidence * 100) }}%
+                                </small>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted d-block">{{ scan.created_at.split('.')[0] }}</small>
+                                <a href="{{ url_for('static', filename=scan.image_path.split('static/')[1]) }}" 
+                                   class="btn btn-sm btn-outline-primary mt-1" target="_blank">
+                                    <i class="fas fa-eye me-1"></i>View Image
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted text-center">No scans found. Upload your first scan to get started!</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function updateFileName(input) {
+            const fileName = input.files[0]?.name;
+            document.getElementById('selected-file').textContent = fileName || '';
+            document.getElementById('upload-btn').disabled = !fileName;
+        }
+
+        // Drag and drop functionality
+        const uploadArea = document.querySelector('.upload-area');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            uploadArea.classList.add('border-primary');
+        }
+
+        function unhighlight(e) {
+            uploadArea.classList.remove('border-primary');
+        }
+
+        uploadArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            const fileInput = document.getElementById('scan-file');
+            
+            fileInput.files = files;
+            updateFileName(fileInput);
+        }
+    </script>
+</body>
+</html> 
