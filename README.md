@@ -167,6 +167,7 @@ Advanced tools like Grad-CAM (for heatmaps) and Plotly/Matplotlib (for charts) a
 
 #### **6. Deployment Tools**
 Docker containers ensure consistent environments across development stages, while cloud services like AWS provide scalability for hosting the application.
+
 ---
 
 ## Future Scope
