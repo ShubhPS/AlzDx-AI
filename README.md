@@ -14,7 +14,7 @@ AlzDx-AI  is a cutting-edge AI-powered platform designed to detect dementia and 
 6. [Future Scope](#future-scope)
 7. [Contributing](#contributing)
    
-![Home Page Interface](static/images/HomePage0.png)
+![Home Page Interface](static/images/AdminDashboard0.png)
 
 ---
 
