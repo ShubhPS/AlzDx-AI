@@ -14,7 +14,7 @@ AlzDx-AI  is a cutting-edge AI-powered platform designed to detect dementia and 
 6. [Future Scope](#future-scope)
 7. [Contributing](#contributing)
    
-![Home Page Interface](static/images/HomePage.png)
+![Home Page Interface](static/images/HomePage0.png)
 
 ---
 
@@ -24,13 +24,13 @@ AlzDx-AI  features two primary interfaces:
 ### User Login Interface
 The user login page allows healthcare professionals to securely access the platform using their credentials or third-party authentication options like Google or GitHub.
 
-![User Login Interface](static/images/UserLogin.png)
+![User Login Interface](static/images/UserLogin0.png)
 
 ### Admin Portal
 The admin portal is restricted to authorized personnel for managing system configurations, user accounts, and data security settings.
 
 Admin Login interface
-![Admin Portal Interface](static/images/AdminLogin.png)
+![Admin Portal Interface](static/images/AdminLogin0.png)
 
 Admin user management
 ![Admin User Management](static/images/AllUsers.png)
