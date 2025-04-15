@@ -35,8 +35,6 @@ Admin Login interface
 Admin user management
 ![Admin User Management](static/images/AllUsers.png)
 
-Admin Dashboard
-![Admin Dashboard](static/images/AdminDashboard.png)
 
 ---
 ## Model
