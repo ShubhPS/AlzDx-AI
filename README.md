@@ -153,7 +153,7 @@ AlzDx-AI  relies on the Alzheimer Disease Neuroimaging Initiative (ADNI) dataset
 
 #### **4. Web Frameworks**
 The platform is built using:
-- **Flask/Django**: Backend frameworks that handle API requests and user interactions efficiently.
+- **Flask**: Backend frameworks that handle API requests and user interactions efficiently.
 - **HTML/CSS/JavaScript**: Frontend technologies used to create responsive interfaces.
 
 ---
